@@ -53,66 +53,69 @@ const CourseIdPage = async ({ params: { courseId } }: Props) => {
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
   const completionText = `(${completedFields}/${totalFields})`;
+  const isComplete = requiredFields.every(Boolean);
 
   return (
-    <main className="flex flex-col gap-16 p-6">
-      <div className="flex items-center justify-start">
-        <div className="flex flex-col items-start justify-start gap-y-2">
-          <h1 className="text-2xl font-medium">Course Setup</h1>
-          <span className="text-sm text-foreground/70">
-            Complete all fields {completionText}
-          </span>
-        </div>
-      </div>
-
-      <div className={cn("grid grid-cols-1 gap-6", "md:grid-cols-2")}>
-        <div className="space-y-6">
-          <div className="flex items-center gap-x-2">
-            <IconBadge icon={LayoutDashboard} />
-            <h2 className="text-xl">Customise your course</h2>
+    <>
+      <main className="flex flex-col gap-16 p-6">
+        <div className="flex items-center justify-start">
+          <div className="flex flex-col items-start justify-start gap-y-2">
+            <h1 className="text-2xl font-medium">Course Setup</h1>
+            <span className="text-sm text-foreground/70">
+              Complete all fields {completionText}
+            </span>
           </div>
-
-          <TitleForm initialData={course} courseId={course.id} />
-          <DescriptionForm initialData={course} courseId={course.id} />
-          <ImageForm initialData={course} courseId={course.id} />
-          <CategoryForm
-            initialData={course}
-            courseId={course.id}
-            options={categories.map((category) => ({
-              label: category.name,
-              value: category.id,
-            }))}
-          />
         </div>
 
-        <div className="space-y-6">
+        <div className={cn("grid grid-cols-1 gap-6", "md:grid-cols-2")}>
           <div className="space-y-6">
             <div className="flex items-center gap-x-2">
-              <IconBadge icon={ListChecks} />
-              <h2 className="text-xl">Course chapters</h2>
+              <IconBadge icon={LayoutDashboard} />
+              <h2 className="text-xl">Customise your course</h2>
             </div>
 
-            <ChaptersForm initialData={course} courseId={course.id} />
+            <TitleForm initialData={course} courseId={course.id} />
+            <DescriptionForm initialData={course} courseId={course.id} />
+            <ImageForm initialData={course} courseId={course.id} />
+            <CategoryForm
+              initialData={course}
+              courseId={course.id}
+              options={categories.map((category) => ({
+                label: category.name,
+                value: category.id,
+              }))}
+            />
           </div>
 
           <div className="space-y-6">
-            <div className="flex items-center gap-x-2">
-              <IconBadge icon={CircleDollarSign} />
-              <h2 className="text-xl">Sell your course</h2>
-            </div>
-            <PriceForm initialData={course} courseId={course.id} />
-          </div>
+            <div className="space-y-6">
+              <div className="flex items-center gap-x-2">
+                <IconBadge icon={ListChecks} />
+                <h2 className="text-xl">Course chapters</h2>
+              </div>
 
-          <div className="space-y-6">
-            <div className="flex items-center gap-x-2">
-              <IconBadge icon={File} />
-              <h2 className="text-xl">Resources/Attachments</h2>
+              <ChaptersForm initialData={course} courseId={course.id} />
             </div>
-            <AttachmentForm initialData={course} courseId={course.id} />
+
+            <div className="space-y-6">
+              <div className="flex items-center gap-x-2">
+                <IconBadge icon={CircleDollarSign} />
+                <h2 className="text-xl">Sell your course</h2>
+              </div>
+              <PriceForm initialData={course} courseId={course.id} />
+            </div>
+
+            <div className="space-y-6">
+              <div className="flex items-center gap-x-2">
+                <IconBadge icon={File} />
+                <h2 className="text-xl">Resources/Attachments</h2>
+              </div>
+              <AttachmentForm initialData={course} courseId={course.id} />
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 };
 export default CourseIdPage;
