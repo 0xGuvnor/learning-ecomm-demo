@@ -3,6 +3,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
 import ToastProvider from "@/components/providers/toaster-provider";
 
 const mhtirogla = localFont({
@@ -29,6 +32,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${neoPixel.className} ${mhtirogla.variable}`}>
           <Toaster />
+          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
           {children}
         </body>
       </html>

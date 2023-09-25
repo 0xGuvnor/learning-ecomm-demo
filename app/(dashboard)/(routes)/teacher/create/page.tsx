@@ -55,15 +55,20 @@ const CreatePage = () => {
         "md:items-center md:justify-center",
       )}
     >
-      <div>
-        <h1 className="text-2xl">Name your course</h1>
-        <p className="text-sm text-foreground/70">
-          What would you like to name your course? Don&apos;t worry, you can
-          change this later.
-        </p>
+      <div className="space-y-4">
+        <div>
+          <h1 className="text-2xl">Name your course</h1>
+          <p className="text-sm text-foreground/70">
+            What would you like to name your course? Don&apos;t worry, you can
+            change this later.
+          </p>
+        </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className={cn()}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className={cn("space-y-4")}
+          >
             <FormField
               control={form.control}
               name="title"
@@ -84,10 +89,12 @@ const CreatePage = () => {
                 </FormItem>
               )}
             />
+
             <div className="flex items-center gap-x-2">
               <Button variant={"ghost"} type="button" asChild>
                 <Link href={"/"}>Cancel</Link>
               </Button>
+
               <Button type="submit" disabled={!isValid || isSubmitting}>
                 Continue
               </Button>
