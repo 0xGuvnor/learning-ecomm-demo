@@ -70,6 +70,7 @@ const CourseIdPage = async ({ params: { courseId } }: Props) => {
               Complete all fields {completionText}
             </span>
           </div>
+          {/* Actions */}
         </div>
 
         <div className={cn("grid grid-cols-1 gap-6", "md:grid-cols-2")}>
