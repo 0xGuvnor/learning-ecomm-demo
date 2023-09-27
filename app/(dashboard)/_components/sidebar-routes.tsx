@@ -3,6 +3,11 @@
 import { BarChart, Compass, Layout, List } from "lucide-react";
 import SidebarItem from "./sidebar-item";
 import { usePathname } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
+
+interface Props {
+  setOpen?: Dispatch<SetStateAction<boolean>>;
+}
 
 const guestRoutes = [
   { icon: Layout, label: "Dashboard", href: "/" },
@@ -14,7 +19,7 @@ const teacherRoutes = [
   { icon: BarChart, label: "Analytics", href: "/teacher/analytics" },
 ];
 
-const SidebarRoutes = () => {
+const SidebarRoutes = ({ setOpen }: Props) => {
   const pathname = usePathname();
 
   const isTeacherPage = pathname.includes("/teacher");
@@ -23,7 +28,7 @@ const SidebarRoutes = () => {
   return (
     <div className="flex w-full flex-col">
       {routes.map((route) => (
-        <SidebarItem key={route.href} {...route} />
+        <SidebarItem key={route.href} setOpen={setOpen} {...route} />
       ))}
     </div>
   );

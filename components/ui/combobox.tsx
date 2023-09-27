@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -26,11 +26,34 @@ interface Props {
 
 export function Combobox({ options, value, onChange }: Props) {
   const [open, setOpen] = useState(false);
+  const [popoverWidth, setPopoverWidth] = useState<number | null>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (buttonRef.current) {
+      setPopoverWidth(buttonRef.current.clientWidth);
+    }
+  }, [buttonRef.current]);
+
+  useEffect(() => {
+    const handleScreenResize = () => {
+      if (buttonRef.current) {
+        setPopoverWidth(buttonRef.current.clientWidth);
+      }
+    };
+
+    window.addEventListener("resize", handleScreenResize);
+
+    return () => {
+      window.removeEventListener("resize", handleScreenResize);
+    };
+  }, []);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          ref={buttonRef}
           variant="outline"
           role="combobox"
           aria-expanded={open}
@@ -42,7 +65,11 @@ export function Combobox({ options, value, onChange }: Props) {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className={cn("w-full p-0")}>
+
+      <PopoverContent
+        style={{ width: popoverWidth ? `${popoverWidth}px` : "" }}
+        className={cn("p-0")}
+      >
         <Command>
           <CommandInput placeholder="Search option..." />
           <CommandEmpty>No option found.</CommandEmpty>

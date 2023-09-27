@@ -17,6 +17,7 @@ import PriceForm from "./_components/price-form";
 import AttachmentForm from "./_components/attachment-form";
 import ChaptersForm from "./_components/chapters-form";
 import Banner from "@/components/banner";
+import Actions from "./_components/actions";
 
 interface Props {
   params: { courseId: string };
@@ -63,14 +64,19 @@ const CourseIdPage = async ({ params: { courseId } }: Props) => {
       )}
 
       <main className="flex flex-col gap-16 p-6">
-        <div className="flex items-center justify-start">
+        <div className="flex items-center justify-between">
           <div className="flex flex-col items-start justify-start gap-y-2">
             <h1 className="text-2xl font-medium">Course Setup</h1>
             <span className="text-sm text-foreground/70">
               Complete all fields {completionText}
             </span>
           </div>
-          {/* Actions */}
+
+          <Actions
+            disabled={!isComplete}
+            courseId={courseId}
+            isPublished={course.isPublished}
+          />
         </div>
 
         <div className={cn("grid grid-cols-1 gap-6", "md:grid-cols-2")}>

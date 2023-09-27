@@ -1,15 +1,27 @@
+"use client";
+
+import { Dispatch, SetStateAction } from "react";
 import Logo from "./logo";
 import SidebarRoutes from "./sidebar-routes";
+import Link from "next/link";
 
-const Sidebar = () => {
+interface Props {
+  setOpen?: Dispatch<SetStateAction<boolean>>;
+}
+
+const Sidebar = ({ setOpen }: Props) => {
   return (
-    <div className="flex h-full flex-col overflow-y-auto border-r border-black/10 bg-background shadow-sm">
-      <div className="h-20 p-6">
+    <div className="flex h-full flex-col overflow-y-auto border-r bg-background shadow-sm">
+      <Link
+        href={"/"}
+        onClick={setOpen ? () => setOpen((prev) => !prev) : () => {}}
+        className="h-20 p-6"
+      >
         <Logo />
-      </div>
+      </Link>
 
       <div className="flex w-full flex-col">
-        <SidebarRoutes />
+        <SidebarRoutes setOpen={setOpen} />
       </div>
     </div>
   );

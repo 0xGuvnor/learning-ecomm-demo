@@ -5,14 +5,16 @@ import { cn } from "@/lib/utils";
 import { type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
 interface Props {
+  setOpen?: Dispatch<SetStateAction<boolean>>;
   icon: LucideIcon;
   label: string;
   href: string;
 }
 
-const SidebarItem = ({ icon: Icon, label, href }: Props) => {
+const SidebarItem = ({ setOpen, icon: Icon, label, href }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -24,6 +26,7 @@ const SidebarItem = ({ icon: Icon, label, href }: Props) => {
   return (
     <Button
       variant={"link"}
+      onClick={setOpen ? () => setOpen((prev) => !prev) : () => {}}
       asChild
       className={cn(
         "h-auto justify-start rounded-none px-0 py-0 pl-6 font-medium text-foreground transition-all duration-300 ease-in-out",

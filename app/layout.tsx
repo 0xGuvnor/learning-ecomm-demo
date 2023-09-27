@@ -7,6 +7,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import ToastProvider from "@/components/providers/toaster-provider";
+import ConfettiProvider from "@/components/providers/confetti-provider";
 
 const mhtirogla = localFont({
   src: "fonts/MHTIROGLA.ttf",
@@ -31,6 +32,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${neoPixel.className} ${mhtirogla.variable}`}>
+          <ConfettiProvider />
           <Toaster />
           <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
           {children}
