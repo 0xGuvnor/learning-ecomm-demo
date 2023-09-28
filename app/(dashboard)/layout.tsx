@@ -10,13 +10,13 @@ interface Props {
 const DashboardLayout = ({ children }: Props) => {
   return (
     <div className="h-full">
-      <div className={cn("fixed left-0 top-0 z-50 h-20 w-full", "md:pl-56")}>
+      <div className={cn("fixed left-0 top-0 h-20 w-full", "md:pl-56")}>
         <Navbar />
       </div>
 
       <div
         className={cn(
-          "fixed inset-y-0 left-0 z-50 hidden h-full w-56 flex-col bg-emerald-500",
+          "fixed inset-y-0 left-0 hidden h-full w-56 flex-col",
           "md:flex",
         )}
       >

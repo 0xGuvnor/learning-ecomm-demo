@@ -31,7 +31,7 @@ const iconMap: Record<Category["id"], IconType> = {
 
 const Categories = ({ items }: Props) => {
   return (
-    <section className="flex items-center gap-x-2 overflow-x-auto">
+    <section className="flex snap-x items-center gap-x-2 overflow-x-auto">
       {items.map((item) => (
         <CategoryItem
           key={item.id}

@@ -1,6 +1,6 @@
 "use client";
 
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useAuth } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
@@ -9,10 +9,11 @@ import { cn } from "@/lib/utils";
 import SearchInput from "./search-input";
 
 const NavbarRoutes = () => {
+  const { userId } = useAuth();
   const pathname = usePathname();
 
   const isTeacherPage = pathname.startsWith("/teacher");
-  const isPlayerPage = pathname.includes("/chapter");
+  const isPlayerPage = pathname.includes("/courses");
   const isSearchPage = pathname.startsWith("/search");
 
   return (
@@ -28,7 +29,7 @@ const NavbarRoutes = () => {
           <Button size={"sm"} variant={"ghost"} asChild>
             <Link href={"/"}>
               <LogOut className="mr-1 h-4 w-4" />
-              Exit Teacher Mode
+              Exit
             </Link>
           </Button>
         ) : (

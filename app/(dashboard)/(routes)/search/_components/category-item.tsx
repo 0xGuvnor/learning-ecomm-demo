@@ -42,7 +42,7 @@ const CategoryItem = ({ label, icon: Icon, value }: Props) => {
       type="button"
       onClick={handleClick}
       className={cn(
-        "flex h-auto items-center gap-x-1 rounded-full border border-muted px-3 py-2 text-sm transition",
+        "flex h-auto snap-start items-center gap-x-1 rounded-full border border-muted px-3 py-2 text-sm transition",
         "hover:border-border",
         isSelected &&
           "border-border bg-primary text-primary-foreground transition hover:bg-primary/80 hover:text-primary-foreground",
